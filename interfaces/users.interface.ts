@@ -8,7 +8,7 @@ enum Role {
 export interface BaseUser extends Document {
     email: string
     password: string,
-    rol: Role
+    role: Role
 }
 
 export interface User extends BaseUser {
