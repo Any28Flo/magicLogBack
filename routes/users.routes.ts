@@ -17,7 +17,6 @@ const usersRoutes = Router();
 
 usersRoutes.get('/', getUsers);
 
-usersRoutes.get('/:id', getUser);
 
 usersRoutes.post('/',
     [

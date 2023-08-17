@@ -5,10 +5,13 @@ import bcrypt from "bcrypt";
 import { generateJWT } from "../helpers/generate-jwt";
 
 const login = async (req: Request, res: Response) => {
+    console.log('/login')
+    console.log(req.body)
     const { email, password } = req.body;
 
     try {
         const user = await UserModel.findOne({ email });
+        console.log(user)
         if (!user) {
             return res.status(400).json({
                 msg: "Usuario/ Password no son correctos"

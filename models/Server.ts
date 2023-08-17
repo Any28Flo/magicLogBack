@@ -31,7 +31,9 @@ export class Server {
     }
 
     private routes() {
-
+        this.app.use('/', (req: Request, res: Response) => {
+            res.send("Hello World");
+        })
         this.app.use('/api/users', usersRoutes);
         this.app.use('/api/auth', authRoutes);
         this.app.use('/api/products', productRoutes)
