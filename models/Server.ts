@@ -2,9 +2,11 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 
 import usersRoutes from '../routes/users.routes';
-import startDatabase from "../database/mongo.config";
-import authRoutes from "../routes/auth";
+import productRoutes from '../routes/products.routes';
 
+
+import authRoutes from "../routes/auth";
+import startDatabase from "../database/mongo.config";
 require('dotenv').config()
 
 export class Server {
@@ -32,6 +34,7 @@ export class Server {
 
         this.app.use('/api/users', usersRoutes);
         this.app.use('/api/auth', authRoutes);
+        this.app.use('/api/products', productRoutes)
     }
 
     public start() {

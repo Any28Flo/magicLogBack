@@ -25,7 +25,8 @@ UserSchema.methods.toJSON = function () {
         return {};
     }
     //Remove fields __v and  password
-    const { __v, password, ...newUser } = user;
+    const { __v, password, _id, ...newUser } = user;
+    newUser.uid = _id;
 
     return newUser
 
