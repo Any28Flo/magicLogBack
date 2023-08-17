@@ -18,18 +18,18 @@ const postUser = async (req: Request, res: Response) => {
     const salt = 10;
     user.password = await bcrypt.hash(user.password, salt);
 
-    // const newUser = new UserModel(user);
-
-
-
+    const newUser = new UserModel(user);
     try {
-        //  await newUser.save();
+        await newUser.save();
         res.status(201).json({
             msg: 'Usuario creado exitosamente'
             //add token
         })
     } catch (error) {
-
+        res.status(400).json({
+            msg: 'Sucedio un error'
+            //add token
+        })
     }
 
 }

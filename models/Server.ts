@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 
 import usersRoutes from '../routes/users.routes';
+import startDatabase from "../database/mongo.config";
 
 require('dotenv').config()
 
@@ -12,9 +13,13 @@ export class Server {
         this.app = express();
         this.port = process.env.PORT;
 
+        this.connectDB();
         this.midlewares();
         this.routes();
 
+    }
+    async connectDB() {
+        await startDatabase()
     }
     private midlewares() {
         this.app.use(cors())

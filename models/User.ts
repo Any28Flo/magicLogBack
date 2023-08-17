@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import { BaseUser } from '../interfaces/users.interface';
 
 const UserSchema = new Schema<BaseUser>({
@@ -17,7 +17,7 @@ const UserSchema = new Schema<BaseUser>({
         enum: ['vendedor', 'comprador', 'admin']
     }
 })
-const UserModel = mongoose.model<BaseUser>('BaseModel', UserSchema);
+const UserModel = mongoose.model<BaseUser>('User', UserSchema);
 
 export default UserModel;
 
