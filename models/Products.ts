@@ -1,26 +1,32 @@
 import mongoose, { Schema } from 'mongoose';
 import { BaseProduct } from '../interfaces/products.interface';
+import UserModel from './User';
 
 const ProductSchema = new Schema<BaseProduct>({
     name: {
         type: String,
         required: true,
+        trim: true
     },
     sku: {
         type: String,
         required: true,
-        unique: true
-
+        unique: true,
+        trim: true
     },
     amount: {
         type: Number,
         required: true,
+        trim: true,
     },
     price: {
         type: Number,
         required: true,
+        trim: true
     },
-
+    registerBy: {
+        type: Schema.Types.ObjectId, ref: UserModel
+    }
 }, {
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
 })

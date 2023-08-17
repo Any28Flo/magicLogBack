@@ -6,6 +6,7 @@ export interface BaseProduct extends Document {
     sku: string
     amount: number
     price: number
+    registerBy: any
 }
 
 export interface Product extends BaseProduct {

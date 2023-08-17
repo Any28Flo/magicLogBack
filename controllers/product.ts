@@ -3,9 +3,13 @@ import { BaseProduct } from "../interfaces/products.interface";
 import ProductModel from "../models/Products";
 
 const postProduct = async (req: Request, res: Response) => {
+    console.log(req.user)
+    console.log(req.uid)
+
     const product: BaseProduct = req.body;
     try {
-        const newProduct = new ProductModel(product);
+        const newProduct: BaseProduct = new ProductModel(product);
+        newProduct.registerBy = req.user?._id;
         await newProduct.save();
         res.status(201).json({
             msg: 'Producto creado exitosamente',
