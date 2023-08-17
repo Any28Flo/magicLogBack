@@ -1,6 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
 import { BaseUser } from '../interfaces/users.interface';
-import { userInfo } from 'os';
 
 const UserSchema = new Schema<BaseUser>({
     email: {

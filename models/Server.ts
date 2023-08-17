@@ -3,6 +3,7 @@ import cors from "cors";
 
 import usersRoutes from '../routes/users.routes';
 import startDatabase from "../database/mongo.config";
+import authRoutes from "../routes/auth";
 
 require('dotenv').config()
 
@@ -29,8 +30,8 @@ export class Server {
 
     private routes() {
 
-        this.app.use('/api/users', usersRoutes)
-
+        this.app.use('/api/users', usersRoutes);
+        this.app.use('/api/auth', authRoutes);
     }
 
     public start() {
