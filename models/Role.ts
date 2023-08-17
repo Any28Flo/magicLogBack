@@ -7,6 +7,9 @@ const RoleSchema = new Schema<BaseUserRole>({
         required: true,
         unique: true
     }
+}, {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+
 })
 const RoleModel = mongoose.model<BaseUserRole>('Role', RoleSchema);
 

@@ -16,6 +16,8 @@ const UserSchema = new Schema<BaseUser>({
         required: true,
         enum: ['vendedor', 'comprador', 'admin']
     }
+}, {
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
 })
 const UserModel = mongoose.model<BaseUser>('User', UserSchema);
 
