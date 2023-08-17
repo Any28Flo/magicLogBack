@@ -12,5 +12,6 @@ export interface BaseUser extends Document {
 }
 
 export interface User extends BaseUser {
-    id: string
+    uid?: string
+
 }

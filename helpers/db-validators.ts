@@ -1,3 +1,4 @@
+import ProductModel from "../models/Products";
 import RoleModel from "../models/Role";
 import UserModel from "../models/User";
 
@@ -14,7 +15,15 @@ const isUserExist = async (email: string) => {
 
     }
 }
+const isProductExist = async (sku: string) => {
+    const existProduct = await ProductModel.findOne({ sku });
+    if (existProduct) {
+        throw new Error(`El producto con el sku: ${sku} ya esta registrado`)
+
+    }
+}
 export {
     isRoleValid,
-    isUserExist
+    isUserExist,
+    isProductExist
 }
