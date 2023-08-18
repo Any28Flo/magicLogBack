@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node  dist/app.js",
-    "postinstall": "tsc",
+    "build": "tsc",
     "tsc": " npx tsc",
     "start:dev": "nodemon --watch '*.ts' --exec 'ts-node' app.ts"
   },
