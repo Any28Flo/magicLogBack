@@ -41,6 +41,15 @@ const login = async (req: Request, res: Response) => {
 
 
 }
+const testEndpoint = async (req: Request, res: Response) => {
+    const { email, password } = req.body;
+    res.status(200).json({
+        msg: 'login success',
+        email,
+        password
+    })
+}
 export {
-    login
+    login,
+    testEndpoint
 }
