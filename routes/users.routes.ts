@@ -12,10 +12,15 @@ import { body } from "express-validator";
 
 import validateFields from "../middlewares/validate_fields";
 import { isRoleValid, isUserExist } from "../helpers/db-validators";
+import validateJWT from "../middlewares/validate_jwt";
+import { isAdminRole } from "../middlewares/validate_rol";
 
 const usersRoutes = Router();
 
-usersRoutes.get('/', getUsers);
+usersRoutes.get('/users-by-rol', [
+    validateJWT,
+    isAdminRole,
+], getUsers);
 
 
 usersRoutes.post('/',
