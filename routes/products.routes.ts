@@ -6,13 +6,14 @@ import validateFields from "../middlewares/validate_fields";
 
 
 import { isProductExist } from "../helpers/db-validators";
-import { isBuyerRole, isSellerRole } from "../middlewares/validate_rol";
+import { isAdminRole, isBuyerRole, isSellerRole } from "../middlewares/validate_rol";
 
 import {
     postProduct,
     getProductsByUser,
     getProducts,
-    getCustomProducts
+    getCustomProducts,
+    getProductsByRole
 } from "../controllers/product";
 
 const productRoutes = Router();
@@ -43,5 +44,20 @@ productRoutes.get('/lista-custom-products', [
     isBuyerRole,
 ], getCustomProducts)
 
+productRoutes.get('/productos-admin', [
+    validateJWT,
+    isAdminRole,
+], getProductsByRole)
+
+productRoutes.get('/lista-productos-admin', [
+    validateJWT,
+    isAdminRole,
+], getProductsByRole)
+
+
+productRoutes.get('/lista-productos-role', [
+    validateJWT,
+    isAdminRole,
+], getProductsByRole)
 
 export default productRoutes;

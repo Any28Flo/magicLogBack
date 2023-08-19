@@ -41,7 +41,7 @@ const isAdminRole = (req: Request, res: Response, next: NextFunction) => {
         })
     }
     const { role, email } = req.user;
-    if (role !== 'comprador') {
+    if (role !== 'admin') {
         return res.status(401).json({
             msg: `${email} no tiene los permisos suficientes`
         })

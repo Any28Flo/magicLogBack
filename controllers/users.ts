@@ -5,8 +5,25 @@ import bcrypt from "bcrypt";
 import UserModel from "../models/User";
 
 
-const getUsers = (req: Request, res: Response) => {
-    res.status(200).send('get user routes')
+const getUsers = async (req: Request, res: Response) => {
+    const { role } = req.query;
+    const filter: any = {};
+
+    if (role) {
+        filter.role = { $regex: role as string, $options: 'i' };
+    }
+    try {
+
+        const users = await UserModel.find(filter)
+
+        res.status(201).json({
+            users
+        })
+
+    } catch (error) {
+
+        throw new Error('Comuniquese con soporte.');
+    }
 }
 const getUser = (req: Request, res: Response) => {
     res.status(200).send('get user')

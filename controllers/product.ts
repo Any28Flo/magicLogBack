@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { BaseProduct } from "../interfaces/products.interface";
 import ProductModel from "../models/Products";
-import UserModel from "../models/User";
 
 const postProduct = async (req: Request, res: Response) => {
 
@@ -55,41 +54,56 @@ const getProducts = async (req: Request, res: Response) => {
         throw new Error('Comuniquese con soporte.');
     }
 }
+const getProductsByRole = async (req: Request, res: Response) => {
+
+    const { userId } = req.query;
+    const filters: any = {};
+
+    if (userId) {
+        filters.registerBy = userId;
+    }
+
+    try {
+
+        const products = await ProductModel.find(filters);
+        res.status(201).json({
+            msg: 'lista productos',
+            products
+        })
+    } catch (error) {
+
+        throw new Error('Comuniquese con soporte.');
+    }
+}
 const getCustomProducts = async (req: Request, res: Response) => {
-    const { keyword, sku, sort, orderBy } = req.query;
+    const { keyword, sku, sort, min, max } = req.query;
 
     const filters: any = {};
     const sortOptions: any = {};
 
-
-    if (!keyword || typeof keyword !== 'string') {
-        return res.status(400).json({ error: 'Parametro invalido, falta filtro keyword' });
+    if (min && max) {
+        filters.price = { $gte: parseInt(min as string), $lte: parseInt(max as string) };
     }
 
+
     if (keyword) {
-        const keywordPattern = new RegExp(keyword, 'i');
-        filters.name = keywordPattern;
+        filters.name = { $regex: keyword as string, $options: 'i' };
     }
 
     if (sku) {
-        filters.sku = sku;
+        filters.sku = { $regex: sku as string, $options: 'i' };
     }
 
-    if (orderBy) {
-        sortOptions[orderBy as string] = 1; // Ascending order
-    }
+
     if (sort === 'asc') {
         sortOptions.price = 1; // Ascending order
     } else if (sort === 'desc') {
         sortOptions.price = -1; // Descending order
     }
 
-
-
     try {
 
-        const products = await ProductModel.find(filters).sort(sortOptions);
-
+        const products = await ProductModel.find(filters)
         res.status(201).json({
             msg: 'lista productos',
             products
@@ -103,5 +117,6 @@ export {
     getProductsByUser,
     getProducts,
     postProduct,
-    getCustomProducts
+    getCustomProducts,
+    getProductsByRole
 }
